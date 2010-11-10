@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @dungeon.name %>
+</p>
+
+<p>
+  <b>Levels:</b>
+  <%= @dungeon.levels %>
+</p>
+
+<ul class="actions">
+  <li><%= link_to 'Edit', edit_dungeon_path(@dungeon) %></li>
+  <li><%= link_to 'Back', dungeons_path %></li>
+</ul>

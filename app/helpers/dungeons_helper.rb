@@ -1,0 +1,2 @@
+module DungeonsHelper
+end

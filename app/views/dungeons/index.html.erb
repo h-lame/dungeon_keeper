@@ -1,0 +1,36 @@
+<h1>Listing dungeons</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Levels</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% if @dungeons.any? %>
+  <% @dungeons.each do |dungeon| %>
+    <tr class="dungeon" id="<%= dom_id(dungeon) %>">
+      <td><%= dungeon.name %></td>
+      <td><%= dungeon.levels %></td>
+      <td>
+        <ul class="actions">
+          <li><%= link_to 'Show', dungeon %></li>
+          <li><%= link_to 'Edit', edit_dungeon_path(dungeon) %></li>
+          <li><%= link_to 'Destroy', dungeon, :confirm => 'Are you sure?', :method => :delete %></li>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+<% else %>
+  <tr class="empty">
+    <td colspan="3">No dungeons stored, <%= link_to 'why not create one?', new_dungeon_path %></td>
+  </tr>
+<% end %>
+</table>
+
+<ul class="actions">
+  <li><%= link_to 'New Dungeon', new_dungeon_path %></li>
+</ul>
