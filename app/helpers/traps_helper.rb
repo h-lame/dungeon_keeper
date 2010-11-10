@@ -1,0 +1,2 @@
+module TrapsHelper
+end

@@ -1,0 +1,13 @@
+<h1>Trap: <%= @trap.name %></h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Base damage caused:</b>
+  <%= @trap.base_damage_caused %>
+</p>
+
+<ul class="actions">
+  <li><%= link_to 'Edit', edit_trap_path(@trap) %></li>
+  <li><%= link_to 'Back', traps_path %></li>
+</ul>

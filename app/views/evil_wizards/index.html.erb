@@ -14,7 +14,7 @@
   <tbody>
 <% if @evil_wizards.any? %>
   <% @evil_wizards.each do |evil_wizard| %>
-    <tr>
+    <%= content_tag_for(:tr, evil_wizard) do %>
       <td><%= evil_wizard.name %></td>
       <td><%= evil_wizard.experience_points %></td>
       <td><%= evil_wizard.magic_school %></td>
@@ -26,7 +26,7 @@
           <li><%= link_to 'Destroy', evil_wizard, :confirm => 'Are you sure?', :method => :delete %></li>
         </ul>
       </td>
-    </tr>
+    <% end %>
   <% end %>
 <% else %>
     <tr class="empty">

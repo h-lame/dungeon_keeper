@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: Tiger Trap
+  base_damage_caused: 20
+
+two:
+  name: Tripwire Mine
+  base_damage_caused: 50

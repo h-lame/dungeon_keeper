@@ -1,4 +1,6 @@
 DungeonKeeper::Application.routes.draw do
+  resources :traps
+
   resources :evil_wizards
 
   resources :dungeons

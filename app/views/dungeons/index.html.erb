@@ -13,7 +13,7 @@
   <tbody>
 <% if @dungeons.any? %>
   <% @dungeons.each do |dungeon| %>
-    <tr class="dungeon" id="<%= dom_id(dungeon) %>">
+    <%= content_tag_for(:tr, dungeon) do %>
       <td><%= dungeon.name %></td>
       <td><%= dungeon.levels %></td>
       <td><%= show_evil_wizard_for_dungeon(dungeon) %></td>
@@ -24,7 +24,7 @@
           <li><%= link_to 'Destroy', dungeon, :confirm => 'Are you sure?', :method => :delete %></li>
         </ul>
       </td>
-    </tr>
+    <% end %>
   <% end %>
 <% else %>
   <tr class="empty">

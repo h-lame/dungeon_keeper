@@ -8,6 +8,8 @@ class CreateEvilWizards < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_index :evil_wizards, :name, :unique => true
   end
 
   def self.down
