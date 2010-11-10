@@ -1,4 +1,6 @@
 DungeonKeeper::Application.routes.draw do
+  resources :evil_wizards
+
   resources :dungeons
 
   # The priority is based upon order of creation:

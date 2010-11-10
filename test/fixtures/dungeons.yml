@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString1
+  name: The pit of despair
   levels: 1
 
 two:
-  name: MyString2
-  levels: 1
+  name: The great sygian abyss
+  levels: 8

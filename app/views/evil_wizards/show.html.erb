@@ -1,0 +1,23 @@
+<h1>Evil Wizard: <%= @evil_wizard.name %></h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Experience points:</b>
+  <%= @evil_wizard.experience_points %>
+</p>
+
+<p>
+  <b>Magic school:</b>
+  <%= @evil_wizard.magic_school %>
+</p>
+
+<p>
+  <b>Dungeon:</b>
+  <%= link_to @evil_wizard.dungeon.name, @evil_wizard.dungeon %>
+</p>
+
+<ul class="actions">
+  <li><%= link_to 'Edit', edit_evil_wizard_path(@evil_wizard) %></li>
+  <li><%= link_to 'Back', evil_wizards_path %></li>
+</ul>

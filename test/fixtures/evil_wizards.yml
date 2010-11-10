@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: Valentino
+  experience_points: 1
+  magic_school: stage
+  dungeon: one
+
+two:
+  name: Paul Daniels
+  experience_points: 1000
+  magic_school: stage
+  dungeon: two

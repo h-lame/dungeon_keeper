@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Levels</th>
+      <th>Evil Wizard</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -15,6 +16,7 @@
     <tr class="dungeon" id="<%= dom_id(dungeon) %>">
       <td><%= dungeon.name %></td>
       <td><%= dungeon.levels %></td>
+      <td><%= show_evil_wizard_for_dungeon(dungeon) %></td>
       <td>
         <ul class="actions">
           <li><%= link_to 'Show', dungeon %></li>
@@ -26,7 +28,7 @@
   <% end %>
 <% else %>
   <tr class="empty">
-    <td colspan="3">No dungeons stored, <%= link_to 'why not create one?', new_dungeon_path %></td>
+    <td colspan="4">No dungeons stored, <%= link_to 'why not create one?', new_dungeon_path %></td>
   </tr>
 <% end %>
 </table>

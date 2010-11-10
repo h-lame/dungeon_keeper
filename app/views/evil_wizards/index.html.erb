@@ -1,0 +1,41 @@
+<h1>Listing evil_wizards</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Experience points</th>
+      <th>Magic school</th>
+      <th>Dungeon</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% if @evil_wizards.any? %>
+  <% @evil_wizards.each do |evil_wizard| %>
+    <tr>
+      <td><%= evil_wizard.name %></td>
+      <td><%= evil_wizard.experience_points %></td>
+      <td><%= evil_wizard.magic_school %></td>
+      <td><%= link_to evil_wizard.dungeon.name, evil_wizard.dungeon %></td>
+      <td>
+        <ul class="actions">
+          <li><%= link_to 'Show', evil_wizard %></li>
+          <li><%= link_to 'Edit', edit_evil_wizard_path(evil_wizard) %></li>
+          <li><%= link_to 'Destroy', evil_wizard, :confirm => 'Are you sure?', :method => :delete %></li>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+<% else %>
+    <tr class="empty">
+      <td colspan="5">No evil wizards stored, <%= link_to 'why not create one?', new_evil_wizard_path %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<ul class="actions">
+  <li><%= link_to 'New Evil wizard', new_evil_wizard_path %></li>
+</ul>

@@ -7,6 +7,11 @@
   <%= @dungeon.levels %>
 </p>
 
+<p>
+  <b>Evil Wizard:</b>
+  <%= show_evil_wizard_for_dungeon(@dungeon) %>
+</p>
+
 <ul class="actions">
   <li><%= link_to 'Edit', edit_dungeon_path(@dungeon) %></li>
   <li><%= link_to 'Back', dungeons_path %></li>
