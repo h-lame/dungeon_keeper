@@ -16,11 +16,9 @@
       <td><%= trap.name %></td>
       <td><%= trap.base_damage_caused %></td>
       <td>
-        <ul class="actions">
-          <li><%= link_to 'Show', trap %></li>
-          <li><%= link_to 'Edit', edit_trap_path(trap) %></li>
-          <li><%= link_to 'Destroy', trap, :confirm => 'Are you sure?', :method => :delete %></li>
-        </ul>
+        <%= actions_menu link_to('Show', trap),
+                         link_to('Edit', edit_trap_path(trap)),
+                         link_to('Destroy', trap, :confirm => 'Are you sure?', :method => :delete) %>
       </td>
     <% end %>
   <% end %>
@@ -32,6 +30,4 @@
   </tbody>
 </table>
 
-<ul class="actions">
-  <li><%= link_to 'New Trap', new_trap_path %></li>
-</ul>
+<%= actions_menu link_to('New Trap', new_trap_path) %>

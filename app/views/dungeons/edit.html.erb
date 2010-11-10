@@ -2,7 +2,5 @@
 
 <%= render 'form' %>
 
-<ul class="actions">
-  <li><%= link_to 'Show', @dungeon %></li>
-  <li><%= link_to 'Back', dungeons_path %></li>
-</ul>
+<%= actions_menu link_to('Show', @dungeon),
+                 link_to('Back', dungeons_path) %>

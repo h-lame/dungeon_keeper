@@ -18,11 +18,9 @@
       <td><%= dungeon.levels %></td>
       <td><%= show_evil_wizard_for_dungeon(dungeon) %></td>
       <td>
-        <ul class="actions">
-          <li><%= link_to 'Show', dungeon %></li>
-          <li><%= link_to 'Edit', edit_dungeon_path(dungeon) %></li>
-          <li><%= link_to 'Destroy', dungeon, :confirm => 'Are you sure?', :method => :delete %></li>
-        </ul>
+        <%= actions_menu link_to('Show', dungeon),
+                         link_to('Edit', edit_dungeon_path(dungeon)),
+                         link_to('Destroy', dungeon, :confirm => 'Are you sure?', :method => :delete) %>
       </td>
     <% end %>
   <% end %>
@@ -33,6 +31,4 @@
 <% end %>
 </table>
 
-<ul class="actions">
-  <li><%= link_to 'New Dungeon', new_dungeon_path %></li>
-</ul>
+<%= actions_menu link_to('New Dungeon', new_dungeon_path) %>

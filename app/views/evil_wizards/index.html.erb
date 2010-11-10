@@ -20,11 +20,9 @@
       <td><%= evil_wizard.magic_school %></td>
       <td><%= link_to evil_wizard.dungeon.name, evil_wizard.dungeon %></td>
       <td>
-        <ul class="actions">
-          <li><%= link_to 'Show', evil_wizard %></li>
-          <li><%= link_to 'Edit', edit_evil_wizard_path(evil_wizard) %></li>
-          <li><%= link_to 'Destroy', evil_wizard, :confirm => 'Are you sure?', :method => :delete %></li>
-        </ul>
+        <%= actions_menu link_to('Show', evil_wizard),
+                         link_to('Edit', edit_evil_wizard_path(evil_wizard)),
+                         link_to('Destroy', evil_wizard, :confirm => 'Are you sure?', :method => :delete) %>
       </td>
     <% end %>
   <% end %>
@@ -36,6 +34,4 @@
   </tbody>
 </table>
 
-<ul class="actions">
-  <li><%= link_to 'New Evil wizard', new_evil_wizard_path %></li>
-</ul>
+<%= actions_menu link_to('New Evil wizard', new_evil_wizard_path) %>

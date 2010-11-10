@@ -17,7 +17,5 @@
   <%= link_to @evil_wizard.dungeon.name, @evil_wizard.dungeon %>
 </p>
 
-<ul class="actions">
-  <li><%= link_to 'Edit', edit_evil_wizard_path(@evil_wizard) %></li>
-  <li><%= link_to 'Back', evil_wizards_path %></li>
-</ul>
+<%= actions_menu link_to('Edit', edit_evil_wizard_path(@evil_wizard),
+                 link_to('Back', evil_wizards_path) %>

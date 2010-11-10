@@ -2,7 +2,5 @@
 
 <%= render 'form' %>
 
-<ul class="actions">
-  <li><%= link_to 'Show', @trap %></li>
-  <li><%= link_to 'Back', traps_path %></li>
-</ul>
+<%= acitons_menu link_to('Show', @trap),
+                 link_to('Back', traps_path) %>
