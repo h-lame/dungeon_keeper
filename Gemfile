@@ -13,8 +13,9 @@ gem 'mysql2'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-# gem 'ruby-debug'
+group :test do
+  gem 'ruby-debug19'
+end
 
 # Bundle the extra gems:
 # gem 'bj'

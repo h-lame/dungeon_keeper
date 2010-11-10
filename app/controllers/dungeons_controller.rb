@@ -1,4 +1,6 @@
 class DungeonsController < ApplicationController
+  before_filter :fetch_dungeon, :only => [:show, :edit, :update, :destroy]
+
   # GET /dungeons
   # GET /dungeons.xml
   def index
@@ -34,7 +36,6 @@ class DungeonsController < ApplicationController
 
   # GET /dungeons/1/edit
   def edit
-    @dungeon = Dungeon.find(params[:id])
   end
 
   # POST /dungeons
@@ -56,8 +57,6 @@ class DungeonsController < ApplicationController
   # PUT /dungeons/1
   # PUT /dungeons/1.xml
   def update
-    @dungeon = Dungeon.find(params[:id])
-
     respond_to do |format|
       if @dungeon.update_attributes(params[:dungeon])
         format.html { redirect_to(@dungeon, :notice => 'Dungeon was successfully updated.') }
@@ -72,12 +71,16 @@ class DungeonsController < ApplicationController
   # DELETE /dungeons/1
   # DELETE /dungeons/1.xml
   def destroy
-    @dungeon = Dungeon.find(params[:id])
     @dungeon.destroy
 
     respond_to do |format|
       format.html { redirect_to(dungeons_url) }
       format.xml  { head :ok }
     end
+  end
+
+  protected
+  def fetch_dungeon
+    @dungeon = Dungeon.find(params[:id])
   end
 end
