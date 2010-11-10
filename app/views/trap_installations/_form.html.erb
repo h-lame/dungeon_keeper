@@ -1,0 +1,37 @@
+<%= form_for(@trap_installation) do |f| %>
+  <% if @trap_installation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trap_installation.errors.count, "error") %> prohibited this trap_installation from being saved:</h2>
+
+      <ul>
+      <% @trap_installation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :dungeon_id %><br />
+    <%= f.collection_select :dungeon_id, @dungeons, :id, :name, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :trap_id %><br />
+    <%= f.collection_select :trap_id, @traps, :id, :name, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :level %><br />
+    <%= f.text_field :level %>
+  </div>
+  <div class="field">
+    <%= f.label :size %><br />
+    <%= f.select :size, TrapInstallation::SIZES, :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :fake %><br />
+    <%= f.check_box :fake %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

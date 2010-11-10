@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101110120809) do
+ActiveRecord::Schema.define(:version => 20101110145351) do
 
   create_table "dungeons", :force => true do |t|
     t.string   "name",       :limit => 200,                :null => false
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(:version => 20101110120809) do
   end
 
   add_index "evil_wizards", ["name"], :name => "index_evil_wizards_on_name", :unique => true
+
+  create_table "trap_installations", :force => true do |t|
+    t.integer  "dungeon_id",                    :null => false
+    t.integer  "trap_id",                       :null => false
+    t.integer  "level",      :default => 1,     :null => false
+    t.string   "size",                          :null => false
+    t.boolean  "fake",       :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "traps", :force => true do |t|
     t.string   "name",               :limit => 200,                :null => false

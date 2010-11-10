@@ -5,3 +5,6 @@ activemodel:
   attribute:
     evil_wizard:
       dungeon_id: Dungeon
+    trap_installation:
+      dungeon_id: Dungeon
+      trap_id: Trap

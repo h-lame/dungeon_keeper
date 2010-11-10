@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  dungeon: one
+  trap: one
+  level: 1
+  size: normal
+  fake: false
+
+two:
+  dungeon: two
+  trap: two
+  level: 5
+  size: big
+  fake: false

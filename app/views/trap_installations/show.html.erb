@@ -1,0 +1,36 @@
+<h1>Trap Installation: <%= @trap_installation.description %></h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Dungeon:</b>
+  <%= link_to @trap_installation.dungeon.name, @trap_installation.dungeon %>
+</p>
+
+<p>
+  <b>Trap:</b>
+  <%= link_to @trap_installation.trap.name, @trap_installation.trap %>
+</p>
+
+<p>
+  <b>Level:</b>
+  <%= @trap_installation.level %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%= @trap_installation.size %>
+</p>
+
+<p>
+  <b>Fake:</b>
+  <%= yes_or_no(@trap_installation.fake) %>
+</p>
+
+<p>
+  <b>Damage caused:</b>
+  <%= @trap_installation.damage_caused %>
+</p>
+
+<%= actions_menu link_to('Edit', edit_trap_installation_path(@trap_installation)),
+                 link_to('Back', trap_installations_path) %>

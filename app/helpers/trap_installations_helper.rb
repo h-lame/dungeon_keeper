@@ -1,0 +1,2 @@
+module TrapInstallationsHelper
+end

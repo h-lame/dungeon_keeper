@@ -6,4 +6,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def yes_or_no(predicate)
+    predicate ? 'yes' : 'no'
+  end
 end
