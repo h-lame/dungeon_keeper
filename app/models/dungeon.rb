@@ -1,5 +1,7 @@
 class Dungeon < ActiveRecord::Base
   has_one :evil_wizard, :dependent => :destroy
+  has_many :trap_installations
+  has_many :traps, :through => :trap_installations, :uniq => true
 
   validates :name, :presence => true,
                    :length => {:maximum => 200},

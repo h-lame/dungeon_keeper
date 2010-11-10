@@ -42,4 +42,13 @@ class DungeonTest < ActiveSupport::TestCase
     d.valid?
     refute_empty d.errors['levels']
   end
+
+  test "should not list a trap twice if it's been installed more than once" do
+    d = Dungeon.create(:name => 'The Great Stygian Abyss', :levels => 8)
+    d.trap_installations.create(:trap => traps(:one), :level => 1, :size => 'normal')
+    d.trap_installations.create(:trap => traps(:one), :level => 7, :size => 'slightly ridiculous')
+
+    assert_equal 1, d.traps.size
+    assert d.traps.include?(traps(:one))
+  end
 end

@@ -56,4 +56,13 @@ class TrapTest < ActiveSupport::TestCase
     t.valid?
     refute_empty t.errors['base_damage_caused']
   end
+
+  test "should not list a dungeon twice if this trap has been installed there more than once" do
+    t = Trap.create(:name => 'Fire Pit', :base_damage_caused => 80)
+    t.trap_installations.create(:dungeon => dungeons(:one), :level => 1, :size => 'normal')
+    t.trap_installations.create(:dungeon => dungeons(:one), :level => 7, :size => 'slightly ridiculous')
+
+    assert_equal 1, t.dungeons.size
+    assert t.dungeons.include?(dungeons(:one))
+  end
 end
