@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :magic_school %><br />
-    <%= f.text_field :magic_school %>
+    <%= f.select :magic_school, EvilWizard::MAGIC_SCHOOLS, :prompt => true %>
   </div>
   <div class="field">
     <%= f.label :dungeon_id %><br />
