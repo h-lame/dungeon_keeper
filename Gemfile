@@ -13,7 +13,7 @@ gem 'mysql2'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-group :test do
+group :test, :development do
   gem 'ruby-debug19'
 end
 
