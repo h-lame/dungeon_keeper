@@ -3,6 +3,7 @@ ul.actions {
   height: auto;
   padding: 0px;
   margin: 0px;
+  clear: both;
 }
 ul.actions>li {
   float: left;

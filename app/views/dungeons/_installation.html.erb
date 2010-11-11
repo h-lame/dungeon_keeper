@@ -1,0 +1,4 @@
+<%= content_tag_for(:li, installation) do %>
+  <%= render installation %>
+  <%= actions_menu link_to('Edit this installation', edit_trap_installation_path(installation)) %>
+<% end %>

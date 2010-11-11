@@ -12,5 +12,15 @@
   <%= show_evil_wizard_for_dungeon(@dungeon) %>
 </p>
 
+<p>
+  <b>Traps:</b>
+  <% if @dungeon.traps.any? %>
+    <%= render :partial => 'installed_trap', :collection => @dungeon.traps %>
+  <% else %>
+    No traps installed in this dungeon, <%= link_to 'why not add one?', new_trap_installation_path %>
+  <% end %>
+</p>
+
 <%= actions_menu link_to('Edit', edit_dungeon_path(@dungeon)),
+                 link_to('Add new installation', new_trap_installation_path),
                  link_to('Back', dungeons_path) %>

@@ -7,5 +7,10 @@
   <%= @trap.base_damage_caused %>
 </p>
 
+<p>
+  <b>Installed in:</b>
+  <%= dungeons_a_trap_is_installed_in(@trap) %>
+</p>
+
 <%= actions_menu link_to('Edit', edit_trap_path(@trap)),
                  link_to('Back', traps_path) %>

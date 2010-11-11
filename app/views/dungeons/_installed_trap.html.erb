@@ -1,0 +1,6 @@
+<%= div_for(installed_trap) do %>
+  <h3><%= installed_trap.name %></h3>
+  <ol id="installations">
+    <%= render :partial => 'installation', :collection => @dungeon.trap_installations.of(installed_trap) %>
+  </ol>
+<% end %>
