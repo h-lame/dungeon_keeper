@@ -1,11 +1,13 @@
 DungeonKeeper::Application.routes.draw do
-  resources :trap_installations
-
-  resources :traps
+  resources :traps do
+    resources :trap_installations
+  end
 
   resources :evil_wizards
 
-  resources :dungeons
+  resources :dungeons do
+    resources :trap_installations
+  end
 
   root :to => 'dungeons#index'
 end

@@ -1,6 +1,6 @@
-<h1>Editing Trap Installation: <%= @trap_installation.description %></h1>
+<h1>Editing Trap Installation <%= scoped_parent_for_title %></h1>
 
 <%= render 'form' %>
 
-<%= actions_menu link_to('Show', @trap_installation),
-                 link_to('Back', trap_installations_path) %>
+<%= actions_menu link_to('Show', [@scope, @trap_installation]),
+                 link_to('Back', [@scope, :trap_installations]) %>

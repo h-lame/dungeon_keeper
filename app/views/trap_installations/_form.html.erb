@@ -1,4 +1,4 @@
-<%= form_for(@trap_installation) do |f| %>
+<%= form_for([@scope, @trap_installation]) do |f| %>
   <% if @trap_installation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@trap_installation.errors.count, "error") %> prohibited this trap_installation from being saved:</h2>
@@ -11,14 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :dungeon_id %><br />
-    <%= f.collection_select :dungeon_id, @dungeons, :id, :name, :prompt => true %>
-  </div>
-  <div class="field">
-    <%= f.label :trap_id %><br />
-    <%= f.collection_select :trap_id, @traps, :id, :name, :prompt => true %>
-  </div>
+  <%= render "form_for_#{@scope.class.name.underscore}_scoped_trap_installation", :f => f %>
   <div class="field">
     <%= f.label :level %><br />
     <%= f.text_field :level %>

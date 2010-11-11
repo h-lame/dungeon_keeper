@@ -17,6 +17,6 @@ class TrapsHelperTest < ActionView::TestCase
     t = Trap.create!(:name => 'Spiky falling block', :base_damage_caused => 20)
     t.trap_installations.clear
     render :text => dungeons_a_trap_is_installed_in(t)
-    assert_select 'a[href=?]', new_trap_installation_path
+    assert_select 'a[href=?]', new_trap_trap_installation_path(t)
   end
 end

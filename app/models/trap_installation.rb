@@ -9,6 +9,8 @@ class TrapInstallation < ActiveRecord::Base
   belongs_to :dungeon
   belongs_to :trap
 
+  attr_protected :trap_id, :dungeon_id
+
   validates_presence_of :dungeon, :trap
 
   validates :level, :presence => true,
@@ -40,9 +42,5 @@ class TrapInstallation < ActiveRecord::Base
     else
       modifier_proc.call(base_damage)
     end
-  end
-
-  def description
-    %Q{#{trap.name} on level #{level} of #{dungeon.name}}
   end
 end

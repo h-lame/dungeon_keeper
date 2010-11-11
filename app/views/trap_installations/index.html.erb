@@ -1,10 +1,9 @@
-<h1>Listing Trap Installations</h1>
+<h1>Listing Trap Installations <%= scoped_parent_for_title %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Dungeon</th>
-      <th>Trap</th>
+      <th><%= dungeon_or_trap_inverse_of_scope %></th>
       <th>Level</th>
       <th>Size</th>
       <th>Fake</th>
@@ -15,22 +14,21 @@
 <% if @trap_installations.any? %>
   <% @trap_installations.each do |trap_installation| %>
     <%= content_tag_for(:tr, trap_installation) do %>
-      <td><%= link_to trap_installation.dungeon.name, trap_installation.dungeon %></td>
-      <td><%= link_to trap_installation.trap.name, trap_installation.trap %></td>
+      <td><%= link_to_dungeon_or_trap_inverse_of_scope(trap_installation) %></td>
       <td><%= trap_installation.level %></td>
       <td><%= trap_installation.size %></td>
       <td><%= yes_or_no(trap_installation.fake) %></td>
-      <td><%= actions_menu link_to('Show', trap_installation),
-                           link_to('Edit', edit_trap_installation_path(trap_installation)),
-                           link_to('Destroy', trap_installation, :confirm => 'Are you sure?', :method => :delete) %></td>
+      <td><%= actions_menu link_to('Show', [@scope, trap_installation]),
+                           link_to('Edit', [:edit, @scope, trap_installation]),
+                           link_to('Destroy', [@scope, trap_installation], :confirm => 'Are you sure?', :method => :delete) %></td>
     <% end %>
   <% end %>
 <% else %>
     <tr class="empty">
-      <td colspan="6">No trap installations stored, <%= link_to 'why not add one?', new_trap_installation_path %></td>
+      <td colspan="6">No trap installations stored for this <%= scoped_parent_type %>, <%= link_to 'why not add one?', [:new, @scope, :trap_installation] %></td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= actions_menu link_to('New Trap installation', new_trap_installation_path) %>
+<%= actions_menu link_to('New Trap installation', [:new, @scope, :trap_installation]) %>

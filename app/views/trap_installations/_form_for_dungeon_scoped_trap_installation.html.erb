@@ -1,0 +1,4 @@
+<div class="field">
+  <%= f.label :trap_id %><br />
+  <%= f.collection_select :trap_id, @traps, :id, :name, :prompt => true %>
+</div>

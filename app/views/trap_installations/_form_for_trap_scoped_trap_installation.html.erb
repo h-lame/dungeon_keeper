@@ -1,0 +1,4 @@
+<div class="field">
+  <%= f.label :dungeon_id %><br />
+  <%= f.collection_select :dungeon_id, @dungeons, :id, :name, :prompt => true %>
+</div>

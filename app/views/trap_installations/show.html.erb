@@ -1,18 +1,10 @@
-<h1>Trap Installation: <%= @trap_installation.description %></h1>
+<h1>Trap Installation <%= scoped_parent_for_title %></h1>
 
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Dungeon:</b>
-  <%= link_to @trap_installation.dungeon.name, @trap_installation.dungeon %>
-</p>
-
-<p>
-  <b>Trap:</b>
-  <%= link_to @trap_installation.trap.name, @trap_installation.trap %>
-</p>
+<%= render "details_for_#{@scope.class.name.underscore}_scoped_trap_installation", :trap_installation => @trap_installation %>
 
 <%= render @trap_installation %>
 
-<%= actions_menu link_to('Edit', edit_trap_installation_path(@trap_installation)),
-                 link_to('Back', trap_installations_path) %>
+<%= actions_menu link_to('Edit', [:edit, @scope, @trap_installation]),
+                 link_to('Back', [@scope, :trap_installations]) %>
