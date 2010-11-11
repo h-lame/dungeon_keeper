@@ -19,6 +19,9 @@ class TrapInstallation < ActiveRecord::Base
   validates :size, :presence => true,
                    :inclusion => TrapInstallation::SIZES
 
+  scope :of, lambda { |trap| where(:trap_id => trap.id) }
+  scope :in, lambda { |dungeon| where(:dungeon_id => dungeon.id) }
+
   def maximum_possible_level_for_installation
     if dungeon.present?
       dungeon.levels

@@ -99,4 +99,39 @@ class TrapInstallationTest < ActiveSupport::TestCase
       assert_equal 0, ti.damage_caused
     end
   end
+
+  test "the 'of' scope should return trap installations that are installations of the supplied trap" do
+    t1 = Trap.create(:name => 'laser tripwire mine', :base_damage_caused => 60)
+    t2 = Trap.create(:name => 'springy branch with a nail in it', :base_damage_caused => 14)
+
+    d = Dungeon.create(:name => 'Hythloth', :levels => 9)
+
+    ti1 = TrapInstallation.create(:trap => t1, :dungeon => d, :level => 1, :size => 'small')
+    ti2 = TrapInstallation.create(:trap => t1, :dungeon => d, :level => 2, :size => 'small')
+    ti3 = TrapInstallation.create(:trap => t2, :dungeon => d, :level => 3, :size => 'normal')
+
+    installations = TrapInstallation.of(t1)
+    assert_equal 2, installations.size
+    assert installations.include?(ti1)
+    assert installations.include?(ti2)
+    refute installations.include?(ti3)
+  end
+
+  test "the 'in' scope should return trap installations that have been installed in the supplied dungeon" do
+    t = Trap.create(:name => 'laser tripwire mine', :base_damage_caused => 60)
+
+    d1 = Dungeon.create(:name => 'Hythloth', :levels => 9)
+    d2 = Dungeon.create(:name => 'Malice', :levels => 4)
+
+    ti1 = TrapInstallation.create(:trap => t, :dungeon => d1, :level => 1, :size => 'small')
+    ti2 = TrapInstallation.create(:trap => t, :dungeon => d2, :level => 2, :size => 'small')
+    ti3 = TrapInstallation.create(:trap => t, :dungeon => d1, :level => 3, :size => 'normal')
+
+    installations = TrapInstallation.in(d1)
+    assert_equal 2, installations.size
+    assert installations.include?(ti1)
+    assert installations.include?(ti3)
+    refute installations.include?(ti2)
+
+  end
 end
