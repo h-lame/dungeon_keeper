@@ -11,4 +11,11 @@ class Dungeon < ActiveRecord::Base
                      :numericality => {:greater_than_or_equal_to => 0, :only_integer => true}
 
   scope :without_an_evil_wizard, includes(:evil_wizard).where(:evil_wizards => {:id => nil})
+
+  before_save :set_experience_points
+
+  protected
+  def set_experience_points
+    self.experience_points = (2 ^ levels)
+  end
 end

@@ -63,4 +63,24 @@ class DungeonTest < ActiveSupport::TestCase
     assert fetched.include?(d2)
     refute fetched.include?(d1)
   end
+
+  test "when we save the dungeon the experience points for defeating the dungeon should be set automatically" do
+    d = Dungeon.new(:name => 'Despair', :levels => 4)
+    assert_equal 0, d.experience_points
+    assert d.save
+    refute_equal 0, d.experience_points
+  end
+
+  test "experience points for defeating the dungeon should be 2 to the power of the number of levels" do
+    d = Dungeon.create(:name => 'Despair', :levels => 12)
+    assert_equal 2^12, d.experience_points
+  end
+
+  test "when we change the number of levels of a dungeon the experience points should also change accordingly when we save the dungeon" do
+    d = Dungeon.create(:name => 'Despair', :levels => 4)
+    old_xp = d.experience_points
+    d.levels = 9
+    d.save
+    refute_equal old_xp, d.experience_points
+  end
 end

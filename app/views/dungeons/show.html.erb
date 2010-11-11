@@ -13,6 +13,11 @@
 </p>
 
 <p>
+  <b>Experience points:</b>
+  <%= @dungeon.experience_points %>
+</p>
+
+<p>
   <b>Traps:</b>
   <% if @dungeon.traps.any? %>
     <%= render :partial => 'installed_trap', :collection => @dungeon.traps %>
