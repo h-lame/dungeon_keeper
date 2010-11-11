@@ -10,4 +10,5 @@ class Dungeon < ActiveRecord::Base
   validates :levels, :presence => true,
                      :numericality => {:greater_than_or_equal_to => 0, :only_integer => true}
 
+  scope :without_an_evil_wizard, includes(:evil_wizard).where(:evil_wizards => {:id => nil})
 end

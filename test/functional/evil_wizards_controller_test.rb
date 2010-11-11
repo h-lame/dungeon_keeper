@@ -21,6 +21,18 @@ class EvilWizardsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:dungeons)
   end
 
+  test "the dungeons fetched during new should only be dungeons without an evil wizard" do
+    d1 = Dungeon.create!(:name => 'Despair', :levels => 4)
+    d2 = Dungeon.create!(:name => 'Destard', :levels => 6)
+
+    d1.create_evil_wizard(:name => 'David Blaine', :magic_school => 'stage', :experience_points => 450)
+
+    get :new
+
+    assert assigns(:dungeons).include?(d2)
+    refute assigns(:dungeons).include?(d1)
+  end
+
   test "should create evil wizard" do
     @evil_wizard.destroy
     assert_difference('EvilWizard.count') do
@@ -50,6 +62,18 @@ class EvilWizardsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:dungeons)
   end
 
+  test "the dungeons fetched during a failed create should only be dungeons without an evil wizard" do
+    d1 = Dungeon.create!(:name => 'Despair', :levels => 4)
+    d2 = Dungeon.create!(:name => 'Destard', :levels => 6)
+
+    d1.create_evil_wizard(:name => 'David Blaine', :magic_school => 'stage', :experience_points => 450)
+
+    post :create, :dungeon => @evil_wizard.attributes.except('name')
+
+    assert assigns(:dungeons).include?(d2)
+    refute assigns(:dungeons).include?(d1)
+  end
+
   test "should show the requested evil wizard" do
     get :show, :id => @evil_wizard.to_param
     assert_response :success
@@ -65,6 +89,19 @@ class EvilWizardsControllerTest < ActionController::TestCase
   test "should fetch a list of dungeons during edit" do
     get :edit, :id => @evil_wizard.to_param
     assert_not_nil assigns(:dungeons)
+  end
+
+  test "the dungeons fetched during edit should be dungeons without an evil wizard and the dungeon of the requested evil wizard" do
+    d1 = Dungeon.create!(:name => 'Despair', :levels => 4)
+    d2 = Dungeon.create!(:name => 'Destard', :levels => 6)
+
+    d1.create_evil_wizard(:name => 'David Blaine', :magic_school => 'stage', :experience_points => 450)
+
+    get :edit, :id => @evil_wizard.to_param
+
+    assert assigns(:dungeons).include?(d2)
+    refute assigns(:dungeons).include?(d1)
+    assert assigns(:dungeons).include?(@evil_wizard.dungeon)
   end
 
   test "should update evil_wizard" do
@@ -87,6 +124,19 @@ class EvilWizardsControllerTest < ActionController::TestCase
   test "should fetch a list of dungeons during update if params are wrong" do
     put :update, :id => @evil_wizard.to_param, :evil_wizard => @evil_wizard.attributes.merge('experience_points' => "2000")
     assert_not_nil assigns(:dungeons)
+  end
+
+  test "the dungeons fetched during a failed update should be dungeons without an evil wizard and the dungeon of the requested evil wizard" do
+    d1 = Dungeon.create!(:name => 'Despair', :levels => 4)
+    d2 = Dungeon.create!(:name => 'Destard', :levels => 6)
+
+    d1.create_evil_wizard(:name => 'David Blaine', :magic_school => 'stage', :experience_points => 450)
+
+    put :update, :id => @evil_wizard.to_param, :evil_wizard => @evil_wizard.attributes.merge('experience_points' => "2000")
+
+    assert assigns(:dungeons).include?(d2)
+    refute assigns(:dungeons).include?(d1)
+    assert assigns(:dungeons).include?(@evil_wizard.dungeon)
   end
 
   test "should destroy evil wizard" do

@@ -85,6 +85,8 @@ class EvilWizardsController < ApplicationController
   end
 
   def fetch_dungeons
-    @dungeons = Dungeon.all
+    @dungeons = Dungeon.without_an_evil_wizard
+    # Not arel or AR here. Just simple ruby Array union (so @dungeons is no longer a scope we can do extra things to)
+    @dungeons = @dungeons | Dungeon.where(:id => @evil_wizard.dungeon_id) if @evil_wizard && @evil_wizard.dungeon.present?
   end
 end

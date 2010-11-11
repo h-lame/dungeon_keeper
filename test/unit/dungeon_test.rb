@@ -51,4 +51,16 @@ class DungeonTest < ActiveSupport::TestCase
     assert_equal 1, d.traps.size
     assert d.traps.include?(traps(:one))
   end
+
+  test "the 'without_an_evil_wizard' scope should return dungeons that don't have an evil wizard" do
+    d1 = Dungeon.create!(:name => 'Despair', :levels => 4)
+    d2 = Dungeon.create!(:name => 'Destard', :levels => 6)
+
+    d1.create_evil_wizard(:name => 'David Blaine', :magic_school => 'stage', :experience_points => 450)
+
+    fetched = Dungeon.without_an_evil_wizard
+
+    assert fetched.include?(d2)
+    refute fetched.include?(d1)
+  end
 end
