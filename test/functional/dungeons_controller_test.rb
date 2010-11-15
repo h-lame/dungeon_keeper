@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DungeonsControllerTest < ActionController::TestCase
   setup do
-    @dungeon = dungeons(:one)
+    @dungeon = Factory.create(:dungeon)
   end
 
   test "should get index" do
@@ -61,7 +61,7 @@ class DungeonsControllerTest < ActionController::TestCase
   test "should not update dungeon if params are wrong" do
     put :update, :id => @dungeon.to_param, :dungeon => @dungeon.attributes.merge('levels' => "-1")
     assert_response :success
-    assert_equal 1, @dungeon.reload.levels
+    assert_equal 8, @dungeon.reload.levels
   end
 
   test "should leave the broken dungeon available to the view if params are wrong during update" do

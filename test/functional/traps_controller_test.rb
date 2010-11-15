@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TrapsControllerTest < ActionController::TestCase
   setup do
-    @trap = traps(:one)
+    @trap = Factory.create(:trap)
   end
 
   test "should get index" do
