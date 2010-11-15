@@ -2,7 +2,8 @@ require 'test_helper'
 
 class EvilWizardsControllerTest < ActionController::TestCase
   setup do
-    @evil_wizard = evil_wizards(:one)
+    @evil_wizard = Factory.create(:evil_wizard)
+    Factory.create(:dungeon)
   end
 
   test "should get index" do
@@ -22,10 +23,8 @@ class EvilWizardsControllerTest < ActionController::TestCase
   end
 
   test "the dungeons fetched during new should only be dungeons without an evil wizard" do
-    d1 = Dungeon.create!(:name => 'Despair', :levels => 4)
-    d2 = Dungeon.create!(:name => 'Destard', :levels => 6)
-
-    d1.create_evil_wizard(:name => 'David Blaine', :magic_school => 'stage', :experience_points => 450)
+    d1 = Factory.create(:dungeon_with_evil_wizard)
+    d2 = Factory.create(:dungeon)
 
     get :new
 
@@ -63,10 +62,8 @@ class EvilWizardsControllerTest < ActionController::TestCase
   end
 
   test "the dungeons fetched during a failed create should only be dungeons without an evil wizard" do
-    d1 = Dungeon.create!(:name => 'Despair', :levels => 4)
-    d2 = Dungeon.create!(:name => 'Destard', :levels => 6)
-
-    d1.create_evil_wizard(:name => 'David Blaine', :magic_school => 'stage', :experience_points => 450)
+    d1 = Factory.create(:dungeon_with_evil_wizard)
+    d2 = Factory.create(:dungeon)
 
     post :create, :dungeon => @evil_wizard.attributes.except('name')
 
@@ -92,10 +89,8 @@ class EvilWizardsControllerTest < ActionController::TestCase
   end
 
   test "the dungeons fetched during edit should be dungeons without an evil wizard and the dungeon of the requested evil wizard" do
-    d1 = Dungeon.create!(:name => 'Despair', :levels => 4)
-    d2 = Dungeon.create!(:name => 'Destard', :levels => 6)
-
-    d1.create_evil_wizard(:name => 'David Blaine', :magic_school => 'stage', :experience_points => 450)
+    d1 = Factory.create(:dungeon_with_evil_wizard)
+    d2 = Factory.create(:dungeon)
 
     get :edit, :id => @evil_wizard.to_param
 
@@ -112,7 +107,7 @@ class EvilWizardsControllerTest < ActionController::TestCase
   test "should not update evil wizard if params are wrong" do
     put :update, :id => @evil_wizard.to_param, :evil_wizard => @evil_wizard.attributes.merge('experience_points' => "2000")
     assert_response :success
-    assert_equal 1, @evil_wizard.reload.experience_points
+    assert_equal 450, @evil_wizard.reload.experience_points
   end
 
   test "should leave the broken evil wizard available to the view if params are wrong during update" do
@@ -127,10 +122,8 @@ class EvilWizardsControllerTest < ActionController::TestCase
   end
 
   test "the dungeons fetched during a failed update should be dungeons without an evil wizard and the dungeon of the requested evil wizard" do
-    d1 = Dungeon.create!(:name => 'Despair', :levels => 4)
-    d2 = Dungeon.create!(:name => 'Destard', :levels => 6)
-
-    d1.create_evil_wizard(:name => 'David Blaine', :magic_school => 'stage', :experience_points => 450)
+    d1 = Factory.create(:dungeon_with_evil_wizard)
+    d2 = Factory.create(:dungeon)
 
     put :update, :id => @evil_wizard.to_param, :evil_wizard => @evil_wizard.attributes.merge('experience_points' => "2000")
 
