@@ -15,6 +15,7 @@ gem 'mysql2'
 
 group :test, :development do
   gem 'ruby-debug19'
+  gem 'factory_girl_rails'
 end
 
 # Bundle the extra gems:
