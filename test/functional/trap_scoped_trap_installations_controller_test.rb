@@ -3,8 +3,11 @@ require 'test_helper'
 class TrapScopedTrapInstallationsControllerTest < ActionController::TestCase
   tests TrapInstallationsController
   setup do
-    @trap = traps(:one)
-    @trap_installation = trap_installations(:one)
+    @trap = Factory.create(:trap)
+    @trap_installation = Factory.create(:trap_installation, :trap => @trap)
+
+    @trap_installation_2 = Factory.create(:trap_installation)
+    Factory.create(:dungeon)
   end
 
   test "should get index" do
@@ -16,8 +19,8 @@ class TrapScopedTrapInstallationsControllerTest < ActionController::TestCase
   test "should fetch only the trap installations for the supplied trap" do
     get :index, :trap_id => @trap.to_param
 
-    assert assigns(:trap_installations).include?(trap_installations(:one))
-    refute assigns(:trap_installations).include?(trap_installations(:two))
+    assert assigns(:trap_installations).include?(@trap_installation)
+    refute assigns(:trap_installations).include?(@trap_installation_2)
   end
 
   test "should get new" do
@@ -56,7 +59,7 @@ class TrapScopedTrapInstallationsControllerTest < ActionController::TestCase
   end
 
   test "should create trap installation scoped to supplied trap even when if an alternative trap_id is supplied in trap_installation params" do
-    post :create, :trap_installation => @trap_installation.attributes.merge('trap_id' => traps(:two).id), :trap_id => @trap.to_param
+    post :create, :trap_installation => @trap_installation.attributes.merge('trap_id' => @trap_installation_2.trap_id), :trap_id => @trap.to_param
 
     assert_equal @trap, assigns(:trap_installation).trap
   end
@@ -94,7 +97,7 @@ class TrapScopedTrapInstallationsControllerTest < ActionController::TestCase
 
   test "should 404 if the requested trap installation isn't of the supplied trap" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      get :show, :id => trap_installations(:two).to_param, :trap_id => @trap.to_param
+      get :show, :id => @trap_installation_2.to_param, :trap_id => @trap.to_param
     end
     # we'd prefer to do
     # assert_response :missing
@@ -109,7 +112,7 @@ class TrapScopedTrapInstallationsControllerTest < ActionController::TestCase
 
   test "should 404 on edit if the requested trap installation isn't of the supplied trap" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      get :edit, :id => trap_installations(:two).to_param, :trap_id => @trap.to_param
+      get :edit, :id => @trap_installation_2.to_param, :trap_id => @trap.to_param
     end
   end
 
@@ -129,14 +132,14 @@ class TrapScopedTrapInstallationsControllerTest < ActionController::TestCase
   end
 
   test "should ignore any attempts to change the trap during an update" do
-    put :update, :id => @trap_installation.to_param, :trap_installation => @trap_installation.attributes.merge('trap_id' => traps(:two).id), :trap_id => @trap.to_param
+    put :update, :id => @trap_installation.to_param, :trap_installation => @trap_installation.attributes.merge('trap_id' => @trap_installation_2.trap_id), :trap_id => @trap.to_param
     assert_equal @trap, assigns(:trap_installation).trap
     assert_equal @trap, @trap_installation.reload.trap
   end
 
   test "should 404 if the requested trap_installation is not of the supplied trap" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      put :update, :id => trap_installations(:two).to_param, :trap_installation => @trap_installation.attributes, :trap_id => @trap.to_param
+      put :update, :id => @trap_installation_2.to_param, :trap_installation => @trap_installation.attributes, :trap_id => @trap.to_param
     end
   end
 
@@ -173,7 +176,7 @@ class TrapScopedTrapInstallationsControllerTest < ActionController::TestCase
   test "should 404 and not destroy the trap installation if it's not of the supplied trap" do
     assert_no_difference('TrapInstallation.count', -1) do
       assert_raises(ActiveRecord::RecordNotFound) do
-        delete :destroy, :id => trap_installations(:two).to_param, :trap_id => @trap.to_param
+        delete :destroy, :id => @trap_installation_2.to_param, :trap_id => @trap.to_param
       end
     end
   end

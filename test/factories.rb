@@ -32,6 +32,6 @@ Factory.define :trap_installation do |ti|
   ti.association :dungeon
   ti.level { 1 }
   ti.sequence :size do |n|
-    TrapInstallation::SIZES[n % TrapInstallation::SIZES.length]
+    TrapInstallation::SIZES[n % TrapInstallation::SIZES.length].dup # duplicate this to avoid it being a "frozen" string
   end
 end

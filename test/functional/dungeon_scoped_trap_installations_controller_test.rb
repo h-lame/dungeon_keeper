@@ -3,8 +3,11 @@ require 'test_helper'
 class DungeonScopedTrapInstallationsControllerTest < ActionController::TestCase
   tests TrapInstallationsController
   setup do
-    @dungeon = dungeons(:one)
-    @trap_installation = trap_installations(:one)
+    @dungeon = Factory.create(:dungeon)
+    @trap_installation = Factory.create(:trap_installation, :dungeon => @dungeon)
+
+    @trap_installation_2 = Factory.create(:trap_installation)
+    Factory.create(:trap)
   end
 
   test "should get index" do
@@ -16,8 +19,8 @@ class DungeonScopedTrapInstallationsControllerTest < ActionController::TestCase
   test "should fetch only the trap installations for the supplied dungeon" do
     get :index, :dungeon_id => @dungeon.to_param
 
-    assert assigns(:trap_installations).include?(trap_installations(:one))
-    refute assigns(:trap_installations).include?(trap_installations(:two))
+    assert assigns(:trap_installations).include?(@trap_installation)
+    refute assigns(:trap_installations).include?(@trap_installation_2)
   end
 
   test "should get new" do
@@ -56,7 +59,7 @@ class DungeonScopedTrapInstallationsControllerTest < ActionController::TestCase
   end
 
   test "should create trap installation scoped to supplied dungeon even when if an alternative dungeon_id is supplied in trap_installation params" do
-    post :create, :trap_installation => @trap_installation.attributes.merge('dungeon_id' => dungeons(:two).id), :dungeon_id => @dungeon.to_param
+    post :create, :trap_installation => @trap_installation.attributes.merge('dungeon_id' => @trap_installation_2.dungeon_id), :dungeon_id => @dungeon.to_param
 
     assert_equal @dungeon, assigns(:trap_installation).dungeon
   end
@@ -94,7 +97,7 @@ class DungeonScopedTrapInstallationsControllerTest < ActionController::TestCase
 
   test "should 404 if the requested trap installation isn't in the supplied dungeon" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      get :show, :id => trap_installations(:two).to_param, :dungeon_id => @dungeon.to_param
+      get :show, :id => @trap_installation_2.to_param, :dungeon_id => @dungeon.to_param
     end
     # we'd prefer to do
     # assert_response :missing
@@ -109,7 +112,7 @@ class DungeonScopedTrapInstallationsControllerTest < ActionController::TestCase
 
   test "should 404 on edit if the requested trap installation isn't in the supplied dungeon" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      get :edit, :id => trap_installations(:two).to_param, :dungeon_id => @dungeon.to_param
+      get :edit, :id => @trap_installation_2.to_param, :dungeon_id => @dungeon.to_param
     end
   end
 
@@ -129,14 +132,14 @@ class DungeonScopedTrapInstallationsControllerTest < ActionController::TestCase
   end
 
   test "should ignore any attempted to change the dungeon parameters during an update" do
-    put :update, :id => @trap_installation.to_param, :trap_installation => @trap_installation.attributes.merge('dungeon_id' => dungeons(:two).id), :dungeon_id => @dungeon.to_param
+    put :update, :id => @trap_installation.to_param, :trap_installation => @trap_installation.attributes.merge('dungeon_id' => @trap_installation_2.dungeon_id), :dungeon_id => @dungeon.to_param
     assert_equal @dungeon, assigns(:trap_installation).dungeon
     assert_equal @dungeon, @trap_installation.reload.dungeon
   end
 
   test "should 404 if the requested trap_installation is not in the supplied dungeon" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      put :update, :id => trap_installations(:two).to_param, :trap_installation => @trap_installation.attributes, :dungeon_id => @dungeon.to_param
+      put :update, :id => @trap_installation_2.to_param, :trap_installation => @trap_installation.attributes, :dungeon_id => @dungeon.to_param
     end
   end
 
@@ -173,7 +176,7 @@ class DungeonScopedTrapInstallationsControllerTest < ActionController::TestCase
   test "should 404 and not destroy the trap installation if it's not in the supplied dungeon" do
     assert_no_difference('TrapInstallation.count', -1) do
       assert_raises(ActiveRecord::RecordNotFound) do
-        delete :destroy, :id => trap_installations(:two).to_param, :dungeon_id => @dungeon.to_param
+        delete :destroy, :id => @trap_installation_2.to_param, :dungeon_id => @dungeon.to_param
       end
     end
   end
