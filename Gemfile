@@ -16,6 +16,7 @@ gem 'mysql2'
 group :test, :development do
   gem 'ruby-debug19'
   gem 'rspec-rails'
+  gem 'webrat'
 end
 
 # Bundle the extra gems:
