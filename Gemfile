@@ -15,6 +15,7 @@ gem 'mysql2'
 
 group :test, :development do
   gem 'ruby-debug19'
+  gem 'shoulda'
   gem 'rspec-rails'
   gem 'webrat'
 end
