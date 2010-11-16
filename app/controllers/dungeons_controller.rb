@@ -4,7 +4,7 @@ class DungeonsController < ApplicationController
   # GET /dungeons
   # GET /dungeons.xml
   def index
-    @dungeons = Dungeon.all
+    @dungeons = Dungeon.order('created_at').all
 
     respond_to do |format|
       format.html # index.html.erb

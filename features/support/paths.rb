@@ -10,6 +10,14 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+    when /the new dungeon page/
+      new_dungeon_path
+    when /the page for dungeon called "([^"]+)"/
+      dungeon_path(Dungeon.where(:name => $1).first.to_param)
+    when /the page with the list of dungeons/
+      dungeons_path
+    when /the page with the list of evil wizards/
+      evil_wizards_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
