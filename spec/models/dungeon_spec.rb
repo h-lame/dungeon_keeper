@@ -77,7 +77,7 @@ describe Dungeon do
 
   it "experience points for defeating the dungeon should be 2 to the power of the number of levels" do
     d = Dungeon.create(:name => 'Despair', :levels => 12)
-    d.experience_points.should == 2^12
+    d.experience_points.should == 2**12
   end
 
   it "when we change the number of levels of a dungeon the experience points should also change accordingly when we save the dungeon" do
