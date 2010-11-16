@@ -3,10 +3,10 @@ require 'test_helper'
 class ApplicationHelperTest < ActionView::TestCase
   test "actions_menu should wrap each argument in a <li> inside a single <ul> with the class 'actions'" do
     render :text => actions_menu('whatever', 'i', 'want')
-    assert_select 'ul.actions' do
-      assert_select 'li', :text => 'whatever'
-      assert_select 'li', :text => 'i'
-      assert_select 'li', :text => 'want'
+    assert_select '.actions_menu' do
+      assert_select '.action:first-child', :text => 'whatever'
+      assert_select '.action', :text => 'i'
+      assert_select '.action:last-child', :text => 'want'
     end
   end
 
