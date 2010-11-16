@@ -16,7 +16,7 @@ gem 'mysql2'
 group :test, :development do
   gem 'ruby-debug19'
   gem 'factory_girl_rails'
-  gem 'capybara'
+  gem 'capybara', '0.3.9'
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'launchy'
