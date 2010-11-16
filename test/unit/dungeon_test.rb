@@ -73,7 +73,7 @@ class DungeonTest < ActiveSupport::TestCase
 
   test "experience points for defeating the dungeon should be 2 to the power of the number of levels" do
     d = Dungeon.create(:name => 'Despair', :levels => 12)
-    assert_equal 2^12, d.experience_points
+    assert_equal 2**12, d.experience_points
   end
 
   test "when we change the number of levels of a dungeon the experience points should also change accordingly when we save the dungeon" do

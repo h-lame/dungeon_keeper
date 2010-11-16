@@ -16,6 +16,6 @@ class Dungeon < ActiveRecord::Base
 
   protected
   def set_experience_points
-    self.experience_points = (2 ^ levels)
+    self.experience_points = (2 ** levels)
   end
 end
