@@ -16,6 +16,10 @@ gem 'mysql2'
 group :test, :development do
   gem 'ruby-debug19'
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'launchy'
 end
 
 # Bundle the extra gems:
