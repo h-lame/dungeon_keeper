@@ -3,7 +3,7 @@ require 'capybara'
 require 'capybara/dsl'
 require 'capybara/rails'
 
-class AddingADungeonAndThenTheEvilWizardForItTest < ActionDispatch::IntegrationTest
+class CapybaraVersionOfAddingADungeonAndThenTheEvilWizardForItTest < ActionDispatch::IntegrationTest
   include Capybara
   test "do it" do
     visit "/dungeons/new"
