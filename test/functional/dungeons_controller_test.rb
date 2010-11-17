@@ -26,18 +26,19 @@ class DungeonsControllerTest < ActionController::TestCase
   end
 
   test "should not create dungeon if params are wrong" do
+    Dungeon.any_instance.stubs(:save).returns(false)
     assert_no_difference('Dungeon.count') do
-      post :create, :dungeon => @dungeon.attributes.except('name')
+      post :create, :dungeon => @dungeon.attributes
     end
 
     assert_response :success
   end
 
   test "should leave the broken dungeon available to the view if params are wrong during create" do
-    post :create, :dungeon => @dungeon.attributes.except('name')
+    Dungeon.any_instance.stubs(:save).returns(false)
+    post :create, :dungeon => @dungeon.attributes
 
-    assert assigns(:dungeon).name.blank?
-    refute_empty assigns(:dungeon).errors
+    assert assigns(:dungeon).new_record?
   end
 
   test "should show the requested dungeon" do
@@ -59,15 +60,16 @@ class DungeonsControllerTest < ActionController::TestCase
   end
 
   test "should not update dungeon if params are wrong" do
-    put :update, :id => @dungeon.to_param, :dungeon => @dungeon.attributes.merge('levels' => "-1")
+    Dungeon.any_instance.stubs(:save).returns(false)
+    put :update, :id => @dungeon.to_param, :dungeon => @dungeon.attributes.merge('levels' => "200")
     assert_response :success
     assert_equal 8, @dungeon.reload.levels
   end
 
   test "should leave the broken dungeon available to the view if params are wrong during update" do
-    put :update, :id => @dungeon.to_param, :dungeon => @dungeon.attributes.merge('levels' => "-1")
-    assert_equal -1, assigns(:dungeon).levels
-    refute_empty assigns(:dungeon).errors
+    Dungeon.any_instance.stubs(:save).returns(false)
+    put :update, :id => @dungeon.to_param, :dungeon => @dungeon.attributes.merge('levels' => "200")
+    assert_equal 200, assigns(:dungeon).levels
   end
 
   test "should destroy dungeon" do

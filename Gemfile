@@ -16,6 +16,7 @@ gem 'mysql2'
 group :test, :development do
   gem 'ruby-debug19'
   gem 'factory_girl_rails'
+  gem 'mocha', :require => false
 end
 
 # Bundle the extra gems:
