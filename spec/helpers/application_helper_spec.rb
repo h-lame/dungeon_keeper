@@ -3,10 +3,10 @@ require 'spec_helper'
 describe ApplicationHelper do
   context "actions_menu" do
     it "should wrap each argument in a <li> inside a single <ul> with the class 'actions'" do
-      actions_menu('whatever', 'i', 'want').should have_selector('ul.actions') do |scope|
-        scope.should have_selector('li', :content => 'whatever')
-        scope.should have_selector('li', :content => 'i')
-        scope.should have_selector('li', :content => 'want')
+      actions_menu('whatever', 'i', 'want').should have_selector('.actions_menu') do |scope|
+        scope.should have_selector('.action:first-child', :content => 'whatever')
+        scope.should have_selector('.action', :content => 'i')
+        scope.should have_selector('.action:last-child', :content => 'want')
       end
     end
 
