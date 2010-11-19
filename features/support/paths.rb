@@ -10,6 +10,9 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+    when /the new there_should_be_monsters page/
+      new_there_should_be_monsters_path
+
     when /the new dungeon page/
       new_dungeon_path
     when /the page for dungeon called "([^"]+)"/
@@ -18,6 +21,8 @@ module NavigationHelpers
       dungeons_path
     when /the page with the list of evil wizards/
       evil_wizards_path
+    when /the new monster page/
+      '/monsters/new'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
