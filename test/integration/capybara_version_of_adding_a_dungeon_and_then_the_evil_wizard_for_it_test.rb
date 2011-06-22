@@ -4,7 +4,7 @@ require 'capybara/dsl'
 require 'capybara/rails'
 
 class CapybaraVersionOfAddingADungeonAndThenTheEvilWizardForItTest < ActionDispatch::IntegrationTest
-  include Capybara
+  include Capybara::DSL
   test "do it" do
     visit "/dungeons/new"
 
@@ -18,10 +18,9 @@ class CapybaraVersionOfAddingADungeonAndThenTheEvilWizardForItTest < ActionDispa
     assert_equal dungeon_path(my_new_dungeon), current_path
 
     assert page.has_xpath?("//h1[contains(text(), 'Dungeon: Despair')]")
-    within('//p') do
-      assert page.has_content?('Levels: 8')
-      assert page.has_content?('Experience points: 256')
-    end
+
+    assert page.has_xpath?("//p[contains(normalize-space(.), 'Levels: 8')]")
+    assert page.has_xpath?("//p[contains(normalize-space(.), 'Experience points: 256')]")
 
     click_link 'why not add one?'
 
@@ -39,11 +38,9 @@ class CapybaraVersionOfAddingADungeonAndThenTheEvilWizardForItTest < ActionDispa
     assert_equal evil_wizard_path(my_new_wizard), current_path
 
     assert page.has_xpath?("//h1[contains(text(), 'Evil Wizard: Batlin')]")
-    within('//p') do
-      assert page.has_content?('Experience points: 100')
-      assert page.has_content?('Magic school: chaos')
-      assert page.has_content?('Dungeon: Despair')
-    end
+    assert page.has_xpath?("//p[contains(normalize-space(.), 'Experience points: 100')]")
+    assert page.has_xpath?("//p[contains(normalize-space(.), 'Magic school: chaos')]")
+    assert page.has_xpath?("//p[contains(normalize-space(.), 'Dungeon: Despair')]")
     click_link 'Despair'
 
     assert_equal dungeon_path(my_new_dungeon), current_path

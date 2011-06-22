@@ -37,7 +37,7 @@ Feature: Manage dungeons
      When I go to the page with the list of evil wizards
      Then I should see that "Despair" is the dungeon that the evil wizard "Batlin" is in
       And I should see that "Castle Britannia" is the dungeon that the evil wizard "Lord British" is in
-     When I go to the page with the list of dungeons page
+     When I go to the page with the list of dungeons
      Then I should see that "Batlin" is the evil wizard in dungeon "Despair"
       And I should see that "Lord British" is the evil wizard in dungeon "Castle Britannia"
      When I press delete for dungeon "Despair"
